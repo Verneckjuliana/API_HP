@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=HpSchema)
 async def post_hp(hp: HpSchema, db: AsyncSession = Depends(get_session)):
-    novo_hp = HpModel(nome=hp.nome, ano_nasc=hp.ano_nasc)
+    novo_hp = HpModel(nome=hp.nome, ano_nasc=hp.ano_nasc, casa=hp.casa)
     db.add(novo_hp)
     await db.commit()
 
@@ -49,6 +49,7 @@ async def put_hp(hp_id: int, hp: HpSchema, db: AsyncSession = Depends(get_sessio
         if hp_up:
             hp_up.nome = hp.nome
             hp_up.ano_nasc = hp.ano_nasc
+            hp_up.casa = hp.casa
 
             await session.commit()
             return hp_up

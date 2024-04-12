@@ -5,6 +5,7 @@ class HpSchema(SCBaseModel):
     id: Optional[int] = None
     nome: str
     ano_nasc: str
+    casa: str
 
     class Config:
         orm_mode = True
