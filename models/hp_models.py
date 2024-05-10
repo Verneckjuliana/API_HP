@@ -1,5 +1,6 @@
 from core.configs import settings
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
 
 class HpModel(settings.DBBaseModel):
     __tablename__ = 'Personagens'
@@ -8,11 +9,4 @@ class HpModel(settings.DBBaseModel):
     nome: str = Column(String(50))
     ano_nasc: str = Column(String(4))
     casa: str = Column(String(50))
-    id_varinha: int = Column(Integer(), ForeignKey('Varinhas.id_varinha'))
-    
-
-
-
-
-
-
+    varinhas = relationship("VarModel", back_populates="personagem")
